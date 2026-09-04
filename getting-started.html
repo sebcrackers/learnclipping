@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — The Daily Clipper</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Old+Standard+TT:wght@400;700&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f1ea;
+      color: #1a1a1a;
+      font-family: 'Old Standard TT', Georgia, serif;
+      line-height: 1.7;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .masthead {
+      text-align: center;
+      border-bottom: 3px double #1a1a1a;
+      border-top: 3px double #1a1a1a;
+      padding: 28px 0 18px;
+      margin-bottom: 0;
+    }
+
+    .masthead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .masthead .tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .masthead .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 14px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      color: #666;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #1a1a1a;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 14px 20px;
+      border-right: 1px solid #ddd;
+      transition: background 0.2s;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    nav a:hover {
+      background: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    .front-page {
+      display: grid;
+      grid-template-columns: 2fr 1px 1fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .front-page .lead {
+      padding-right: 28px;
+    }
+
+    .front-page .lead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead p {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 18px;
+    }
+
+    .divider-v {
+      background: #ccc;
+    }
+
+    .front-page .sidebar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .front-page .sidebar ol {
+      padding-left: 20px;
+    }
+
+    .front-page .sidebar li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .front-page .sidebar li a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .front-page .sidebar li a:hover {
+      text-decoration: underline;
+    }
+
+    .article {
+      padding: 36px 0;
+    }
+
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .article .subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .article .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 12px;
+    }
+
+    .article-body {
+      column-count: 2;
+      column-gap: 36px;
+      column-rule: 1px solid #e0ddd5;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .article-body p:first-of-type::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+    }
+
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 24px 0 12px;
+      break-after: avoid;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+    }
+
+    .article-body strong {
+      font-weight: 700;
+    }
+
+    .article-body a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .pull-quote {
+      border-top: 3px double #1a1a1a;
+      border-bottom: 3px double #1a1a1a;
+      padding: 24px 0;
+      margin: 28px 0;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-top: 10px;
+      font-style: normal;
+    }
+
+    .ad-box {
+      border: 2px dashed #bbb;
+      text-align: center;
+      padding: 24px;
+      margin: 28px 0;
+      break-inside: avoid;
+    }
+
+    .ad-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .ad-box .text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      background: #1a1a1a;
+      color: #f4f1ea;
+      padding: 32px;
+      text-align: center;
+      margin: 36px 0 0;
+    }
+
+    .cta-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      color: #ccc;
+    }
+
+    .cta-box a {
+      display: inline-block;
+      background: #f4f1ea;
+      color: #1a1a1a;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .cta-box a:hover {
+      background: #e8e2d4;
+    }
+
+    footer {
+      border-top: 3px double #1a1a1a;
+      margin-top: 40px;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .masthead h1 {
+        font-size: 2.2rem;
+      }
+
+      .front-page {
+        grid-template-columns: 1fr;
+      }
+
+      .front-page .lead {
+        padding-right: 0;
+      }
+
+      .divider-v {
+        display: none;
+      }
+
+      .article-body {
+        column-count: 1;
+      }
+
+      .article h2 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        padding: 12px 14px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="tagline">The Premier Publication on Short-Form Video Monetization</p>
+    <h1>The Daily Clipper</h1>
+    <div class="meta">
+      <span>Vol. I — Issue No. 1</span>
+      <span>Established 2026</span>
+      <span>learnclipping.wiki</span>
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html">Front Page</a>
+    <a href="getting-started.html">Getting Started</a>
+    <a href="tools.html">Tools &amp; Software</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="tips.html">Tips &amp; Tricks</a>
+  </nav>
+
+  <article class="article">
+    <h2>Getting Started: Your First Clip in 30 Minutes</h2>
+    <p class="subtitle">A practical walkthrough for absolute beginners — no editing experience required.</p>
+    <p class="byline">By The Editors — Section: Getting Started</p>
+
+    <div class="article-body">
+
+      <p>Clipping is the act of taking a segment from a longer piece of content — a podcast, a livestream, an interview — and reformatting it as a short vertical video suitable for TikTok, YouTube Shorts, Instagram Reels, or Facebook Reels. The clip is typically between fifteen and sixty seconds long. The goal is to capture a single compelling moment that performs well on its own, without requiring the viewer to have watched the original source material.</p>
+
+      <h3>Step 1: Pick a Niche</h3>
+      <p>Before you touch any software, decide what kind of content you want to clip. The most common and profitable niches right now are finance and crypto commentary, comedy podcasts, fitness and health influencers, political commentary, gaming highlights, and self-improvement/motivational content. Pick one. Don't try to clip everything. Algorithms reward consistency. If you post crypto clips on an account that also posts cooking tips, the platform won't know who to show your content to. Pick a lane and stay in it for at least the first month.</p>
+
+      <h3>Step 2: Find Your Source Content</h3>
+      <p>You need long-form videos to clip from. The best sources are podcasts and livestreams that publish frequently — ideally daily. Good sources include Joe Rogan Experience, the All-In Podcast, Alex Hormozi's content, livestreamers in your niche, and any channel that consistently produces ninety-plus-minute episodes. Subscribe to three or four of them. When a new episode drops, watch it at 1.5x or 2x speed and flag moments that made you react — laugh, think, or feel something. If it made you react, it'll make others react too.</p>
+
+      <h3>Step 3: Download the Source</h3>
+      <p>You'll need the source video on your computer to edit it. Tools like yt-dlp (free, command-line) or 4K Video Downloader (free with a paid tier) let you download YouTube videos. For Twitch clips and VODs, use TwitchLeaks or TwitchTracker to find downloadable past broadcasts. Save the full video locally. You don't need to download the entire thing every time — sometimes you can work with just the segment you want.</p>
+
+      <h3>Step 4: Cut the Clip</h3>
+      <p>Open your video editor — we recommend CapCut for beginners (free, available on desktop and mobile). Import your source video. Find the moment you flagged. Trim it down to the essential part. The ideal clip structure is: a hook in the first two seconds (the most shocking or interesting thing said), the context or explanation, and a natural ending. Cut out dead air, pauses, and filler words. The tighter the edit, the better it performs. Aim for under thirty seconds if possible.</p>
+
+      <h3>Step 5: Add Captions</h3>
+      <p>Captions are non-negotiable. The majority of short-form video viewers watch with sound off or in environments where they can't hear clearly. Auto-generated captions in CapCut are decent, but take the time to manually fix them — the auto-caption tools frequently mishear names, numbers, and slang. Style your captions boldly: large text, white or yellow, with a black outline. Place them in the center-lower third of the screen so they don't get covered by platform UI elements.</p>
+
+      <h3>Step 6: Format for Vertical</h3>
+      <p>Set your project to 9:16 aspect ratio (1080x1920 pixels). If the source is horizontal, place it in the center of the frame and fill the top and bottom areas with a blurred version of the same video, a solid color, or a relevant background image. CapCut does this automatically with its "background blur" feature. Make sure the speaker's face and the captions are both visible and not overlapping.</p>
+
+      <h3>Step 7: Export and Post</h3>
+      <p>Export at 1080x1920, 30fps or 60fps, MP4 format. Post to whichever platform you're targeting first. Most clippers start with TikTok because it has the most aggressive organic reach for new accounts. Post one to three clips per day. Don't post five on day one and then go silent for a week. Consistency matters more than volume. Use relevant hashtags — three to five is enough. Don't stuff twenty hashtags hoping one catches.</p>
+
+      <div class="pull-quote">
+        <blockquote>"Your first hundred clips will be bad. That's not failure — that's tuition."</blockquote>
+        <cite>— Every successful clipper ever</cite>
+      </div>
+
+      <h3>Common Beginner Mistakes</h3>
+      <ul>
+        <li><strong>Clipping too long.</strong> If it's over sixty seconds, it's not a short. Cut harder.</li>
+        <li><strong>No captions.</strong> You lose 60% of viewers in the first three seconds if there's nothing to read.</li>
+        <li><strong>Weak hooks.</strong> If the first two seconds are someone clearing their throat, the viewer is gone.</li>
+        <li><strong>Inconsistent posting.</strong> One clip a day for thirty days beats thirty clips in one day.</li>
+        <li><strong>Switching niches.</strong> Don't post crypto today and cooking tomorrow. The algorithm needs to learn who you are.</li>
+      </ul>
+
+      <p>Once you've posted your first clip, you're officially a clipper. The rest is volume, iteration, and patience. Head to our Tools &amp; Software page to learn what equipment and programs will speed up your workflow, and then visit Monetization to understand how this turns into actual income on Whop.</p>
+
+    </div>
+  </article>
+
+  <div class="cta-box">
+    <h3>What Should You Use to Clip?</h3>
+    <p>Check out our full breakdown of the best free and paid tools.</p>
+    <a href="tools.html">See the Tools →</a>
+  </div>
+
+  <footer>
+    <p>© 2026 The Daily Clipper — learnclipping.wiki</p>
+    <p>For inquiries: contact@learnclipping.wiki</p>
+  </footer>
+
+</body>
+</html>
