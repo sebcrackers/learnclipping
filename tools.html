@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools &amp; Software — The Daily Clipper</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Old+Standard+TT:wght@400;700&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f1ea;
+      color: #1a1a1a;
+      font-family: 'Old Standard TT', Georgia, serif;
+      line-height: 1.7;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .masthead {
+      text-align: center;
+      border-bottom: 3px double #1a1a1a;
+      border-top: 3px double #1a1a1a;
+      padding: 28px 0 18px;
+      margin-bottom: 0;
+    }
+
+    .masthead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .masthead .tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .masthead .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 14px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      color: #666;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #1a1a1a;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 14px 20px;
+      border-right: 1px solid #ddd;
+      transition: background 0.2s;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    nav a:hover {
+      background: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    .front-page {
+      display: grid;
+      grid-template-columns: 2fr 1px 1fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .front-page .lead {
+      padding-right: 28px;
+    }
+
+    .front-page .lead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead p {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 18px;
+    }
+
+    .divider-v {
+      background: #ccc;
+    }
+
+    .front-page .sidebar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .front-page .sidebar ol {
+      padding-left: 20px;
+    }
+
+    .front-page .sidebar li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .front-page .sidebar li a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .front-page .sidebar li a:hover {
+      text-decoration: underline;
+    }
+
+    .article {
+      padding: 36px 0;
+    }
+
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .article .subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .article .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 12px;
+    }
+
+    .article-body {
+      column-count: 2;
+      column-gap: 36px;
+      column-rule: 1px solid #e0ddd5;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .article-body p:first-of-type::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+    }
+
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 24px 0 12px;
+      break-after: avoid;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+    }
+
+    .article-body strong {
+      font-weight: 700;
+    }
+
+    .article-body a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .pull-quote {
+      border-top: 3px double #1a1a1a;
+      border-bottom: 3px double #1a1a1a;
+      padding: 24px 0;
+      margin: 28px 0;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-top: 10px;
+      font-style: normal;
+    }
+
+    .ad-box {
+      border: 2px dashed #bbb;
+      text-align: center;
+      padding: 24px;
+      margin: 28px 0;
+      break-inside: avoid;
+    }
+
+    .ad-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .ad-box .text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      background: #1a1a1a;
+      color: #f4f1ea;
+      padding: 32px;
+      text-align: center;
+      margin: 36px 0 0;
+    }
+
+    .cta-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      color: #ccc;
+    }
+
+    .cta-box a {
+      display: inline-block;
+      background: #f4f1ea;
+      color: #1a1a1a;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .cta-box a:hover {
+      background: #e8e2d4;
+    }
+
+    footer {
+      border-top: 3px double #1a1a1a;
+      margin-top: 40px;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .masthead h1 {
+        font-size: 2.2rem;
+      }
+
+      .front-page {
+        grid-template-columns: 1fr;
+      }
+
+      .front-page .lead {
+        padding-right: 0;
+      }
+
+      .divider-v {
+        display: none;
+      }
+
+      .article-body {
+        column-count: 1;
+      }
+
+      .article h2 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        padding: 12px 14px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="tagline">The Premier Publication on Short-Form Video Monetization</p>
+    <h1>The Daily Clipper</h1>
+    <div class="meta">
+      <span>Vol. I — Issue No. 1</span>
+      <span>Established 2025</span>
+      <span>learnclipping.wiki</span>
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html">Front Page</a>
+    <a href="getting-started.html">Getting Started</a>
+    <a href="tools.html">Tools &amp; Software</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="tips.html">Tips &amp; Tricks</a>
+  </nav>
+
+  <article class="article">
+    <h2>Tools &amp; Software: What You Actually Need</h2>
+    <p class="subtitle">A no-nonsense breakdown of every tool in a clipper's workflow, ranked by necessity.</p>
+    <p class="byline">By The Editors — Section: Equipment</p>
+
+    <div class="article-body">
+
+      <p>One of the biggest advantages of clipping as a side hustle is the low startup cost. You do not need a $3,000 editing rig, a camera, or a microphone. You need a computer that can play video without stuttering, an internet connection, and free software. That's it. Everything beyond that is an upgrade, not a requirement. Below is the complete toolkit, organized by what you need now versus what you might want later.</p>
+
+      <h3>The Essentials (Total Cost: $0)</h3>
+
+      <p><strong>CapCut (Desktop)</strong> — This is the editing software most clippers use, and it's free. It handles trimming, captioning, background blur, transitions, and effects. The auto-caption feature alone saves hours of manual work. It has a desktop version for Windows and Mac that is far more capable than the mobile app. There is a Pro tier, but you can run a clipping operation indefinitely without it. Start here. Don't switch until you hit a wall that CapCut can't solve.</p>
+
+      <p><strong>yt-dlp</strong> — A free, open-source command-line tool for downloading videos from YouTube and hundreds of other sites. It's the gold standard for getting source material. The learning curve is the command line, but once you know the basic command (yt-dlp [URL]), it takes three seconds to download a two-hour podcast. If command-line tools intimidate you, 4K Video Downloader is a graphical alternative with a free tier that handles most use cases.</p>
+
+      <p><strong>A YouTube Account</strong> — For finding source material. Subscribe to the channels you plan to clip from so new episodes show up in your feed. Turn on notifications for the ones that post daily so you can be among the first to clip a fresh episode. Being early matters — the first five clippers to post a moment from a new episode get the bulk of the views.</p>
+
+      <p><strong>A TikTok / YouTube / Instagram Account</strong> — Pick one platform to start. Don't try to manage three accounts on day one. TikTok is the recommended starting point because it gives new accounts the most organic reach. You can always cross-post later once you have a workflow dialed in.</p>
+
+      <h3>Recommended Upgrades ($10–$50/month)</h3>
+
+      <p><strong>CapCut Pro</strong> — The paid tier unlocks additional effects, templates, and higher export quality. Not necessary for beginners, but useful once you're producing ten-plus clips a day and want to speed up your workflow with saved presets and batch operations. Runs about $10/month.</p>
+
+      <p><strong>OpusClip or Vizard.ai</strong> — AI-powered clipping tools that analyze a long-form video and automatically identify potentially viral moments, then format them vertically with captions. These are genuinely useful for discovering moments you might have missed, but they are not a replacement for human judgment. Use them as a discovery tool, not as your entire workflow. Plans start around $15–$20/month. If budget is tight, skip these entirely — manual clipping produces better results once you know what you're doing.</p>
+
+      <p><strong>Submagic</strong> — A caption styling tool that produces the animated, keyword-highlighted captions you see on top-performing clips. If you've ever seen captions where individual words pop in with different colors and emphasis, that's likely Submagic or a similar tool. Around $10/month. Optional but gives your clips a more professional, polished look that can improve retention.</p>
+
+      <p><strong>A Whop Account</strong> — This is where monetization happens. Whop is a marketplace platform where you can sell digital products, including clipping courses, preset packs, caption templates, and access to communities. Creating an account is free. You only pay when you make a sale. More on this in the Monetization section.</p>
+
+      <h3>Hardware Considerations</h3>
+
+      <p>You don't need a gaming PC, but video editing does require some baseline specs. If your computer struggles to play a 1080p video without stuttering, it will struggle to edit one. Minimum practical specs: 8GB RAM (16GB preferred), any processor from the last five years, and enough storage for source videos (a two-hour podcast at 1080p is roughly 1–2GB). An SSD makes everything noticeably faster than a traditional hard drive. No GPU is required for basic clipping in CapCut.</p>
+
+      <p>If you're editing on a laptop, prop it up or use a cooling pad. Rendering video generates heat, and thermal throttling will slow you down more than any software limitation.</p>
+
+      <div class="ad-box">
+        <p class="label">— Classifieds —</p>
+        <p class="text">Looking for a preset pack?<br>Check our Whop store.</p>
+      </div>
+
+      <h3>What You Do NOT Need</h3>
+
+      <ul>
+        <li><strong>A camera.</strong> You're not filming anything. You're editing existing content.</li>
+        <li><strong>A microphone.</strong> Same reason. No recording required.</li>
+        <li><strong>Adobe Premiere Pro.</strong> It's powerful but overkill for clipping. CapCut does 95% of what you need at zero cost. Premiere is $22/month for no meaningful advantage in this specific workflow.</li>
+        <li><strong>A paid VPN.</strong> Unless you're downloading from geo-restricted sources, your default connection is fine.</li>
+        <li><strong>A second monitor.</strong> Nice to have for watching source video on one screen and editing on another, but not required. Many clippers work from a single laptop screen.</li>
+      </ul>
+
+      <p>The takeaway: do not spend money before your first clip earns a dollar. Use the free tools, learn the craft, and reinvest your first earnings into upgrades that will actually speed up your output. A $20/month tool is only worth it if it saves you more than $20 worth of time each month.</p>
+
+    </div>
+  </article>
+
+  <div class="cta-box">
+    <h3>How Do You Actually Make Money?</h3>
+    <p>Learn how clippers turn views into income on Whop.</p>
+    <a href="monetization.html">Read About Monetization →</a>
+  </div>
+
+  <footer>
+    <p>© 2025 The Daily Clipper — learnclipping.wiki</p>
+    <p>For inquiries: contact@learnclipping.wiki</p>
+  </footer>
+
+</body>
+</html>
