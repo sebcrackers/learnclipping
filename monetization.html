@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monetization — The Daily Clipper</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Old+Standard+TT:wght@400;700&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f1ea;
+      color: #1a1a1a;
+      font-family: 'Old Standard TT', Georgia, serif;
+      line-height: 1.7;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .masthead {
+      text-align: center;
+      border-bottom: 3px double #1a1a1a;
+      border-top: 3px double #1a1a1a;
+      padding: 28px 0 18px;
+      margin-bottom: 0;
+    }
+
+    .masthead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .masthead .tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .masthead .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 14px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      color: #666;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #1a1a1a;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 14px 20px;
+      border-right: 1px solid #ddd;
+      transition: background 0.2s;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    nav a:hover {
+      background: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    .front-page {
+      display: grid;
+      grid-template-columns: 2fr 1px 1fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .front-page .lead {
+      padding-right: 28px;
+    }
+
+    .front-page .lead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead p {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 18px;
+    }
+
+    .divider-v {
+      background: #ccc;
+    }
+
+    .front-page .sidebar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .front-page .sidebar ol {
+      padding-left: 20px;
+    }
+
+    .front-page .sidebar li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .front-page .sidebar li a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .front-page .sidebar li a:hover {
+      text-decoration: underline;
+    }
+
+    .article {
+      padding: 36px 0;
+    }
+
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .article .subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .article .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 12px;
+    }
+
+    .article-body {
+      column-count: 2;
+      column-gap: 36px;
+      column-rule: 1px solid #e0ddd5;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .article-body p:first-of-type::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+    }
+
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 24px 0 12px;
+      break-after: avoid;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+    }
+
+    .article-body strong {
+      font-weight: 700;
+    }
+
+    .article-body a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .pull-quote {
+      border-top: 3px double #1a1a1a;
+      border-bottom: 3px double #1a1a1a;
+      padding: 24px 0;
+      margin: 28px 0;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-top: 10px;
+      font-style: normal;
+    }
+
+    .ad-box {
+      border: 2px dashed #bbb;
+      text-align: center;
+      padding: 24px;
+      margin: 28px 0;
+      break-inside: avoid;
+    }
+
+    .ad-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .ad-box .text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      background: #1a1a1a;
+      color: #f4f1ea;
+      padding: 32px;
+      text-align: center;
+      margin: 36px 0 0;
+    }
+
+    .cta-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      color: #ccc;
+    }
+
+    .cta-box a {
+      display: inline-block;
+      background: #f4f1ea;
+      color: #1a1a1a;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .cta-box a:hover {
+      background: #e8e2d4;
+    }
+
+    footer {
+      border-top: 3px double #1a1a1a;
+      margin-top: 40px;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .masthead h1 {
+        font-size: 2.2rem;
+      }
+
+      .front-page {
+        grid-template-columns: 1fr;
+      }
+
+      .front-page .lead {
+        padding-right: 0;
+      }
+
+      .divider-v {
+        display: none;
+      }
+
+      .article-body {
+        column-count: 1;
+      }
+
+      .article h2 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        padding: 12px 14px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="tagline">The Premier Publication on Short-Form Video Monetization</p>
+    <h1>The Daily Clipper</h1>
+    <div class="meta">
+      <span>Vol. I — Issue No. 1</span>
+      <span>Established 2026</span>
+      <span>learnclipping.wiki</span>
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html">Front Page</a>
+    <a href="getting-started.html">Getting Started</a>
+    <a href="tools.html">Tools &amp; Software</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="tips.html">Tips &amp; Tricks</a>
+  </nav>
+
+  <article class="article">
+    <h2>Monetization: Earning on Whop</h2>
+    <p class="subtitle">How clippers convert short-form views into recurring income through digital products and community access.</p>
+    <p class="byline">By The Editors — Section: The Business</p>
+
+    <div class="article-body">
+
+      <p>There are several ways to make money from clipping, and they are not mutually exclusive. Most successful clippers combine two or three revenue streams. This section covers the primary methods, with a focus on Whop as a platform for selling digital products — which is where the most reliable, scalable income tends to come from.</p>
+
+      <h3>Revenue Stream 1: Platform Creator Funds</h3>
+
+      <p>TikTok, YouTube, and Instagram all offer some form of creator compensation based on video performance. TikTok's Creativity Program pays based on views, eligible content, and geographic region. YouTube Shorts shares ad revenue. Instagram Reels bonuses are inconsistent but occasionally available. These payouts are typically small per video — often $0.50 to $2 per thousand views — but they compound if you're posting daily and hitting consistent numbers. A clipper posting three clips a day across two platforms can generate $500–$2,000/month from creator funds alone, assuming average engagement.</p>
+
+      <p>The downside: platform payouts fluctuate based on algorithm changes, seasonality, and platform policy. You cannot rely on them as your sole income. Treat them as a baseline — bonus money that comes in regardless of what else you're doing.</p>
+
+      <h3>Revenue Stream 2: Affiliate Marketing</h3>
+
+      <p>Many clippers include affiliate links in their bio or pinned comments. If you clip finance or crypto content, affiliate links to trading platforms, newsletters, or courses can generate commissions. The key is relevance: if your clip is about a specific crypto exchange and your bio link goes to that exchange's sign-up page, conversion rates are significantly higher than a generic link. Typical affiliate commissions range from $10 to $100 per sign-up, depending on the program.</p>
+
+      <h3>Revenue Stream 3: Whop — The Primary Income Engine</h3>
+
+      <p>This is where clipping turns from a side hustle into a business. Whop is a marketplace platform designed for selling digital products and access to online communities. For clippers, there are three product types that consistently sell well:</p>
+
+      <h4>1. Clipping Courses ($27–$97)</h4>
+      <p>Once you've figured out a workflow that works — which tools to use, which niches to target, how to caption effectively, how often to post — package that knowledge into a course. It doesn't need to be a Hollywood production. A series of screen-recorded video modules walking through your exact process, plus a written guide with screenshots, is enough. Price it between $27 and $97 depending on depth. Whop handles payment processing, delivery, and customer management. You build the product once and sell it indefinitely.</p>
+
+      <h4>2. Caption Preset Packs ($9–$25)</h4>
+      <p>If you've developed a caption style that performs well — specific fonts, colors, animation timing — export those presets and sell them. Other clippers will pay for templates that save them setup time. This is a low-ticket, high-volume product. A $15 pack that sells ten copies a day generates $4,500/month with zero per-unit cost.</p>
+
+      <h4>3. Paid Communities / Discord Access ($10–$50/month)</h4>
+      <p>Recurring revenue is the holy grail of online income. A paid Discord server or Whop community where members get access to daily viral clips they can re-post, niche trend alerts, tool recommendations, and direct feedback on their own clips creates monthly income that compounds. At $20/month per member, 100 members = $2,000/month recurring. 500 members = $10,000/month. The work shifts from clipping for yourself to curating and managing a community — but the income is more stable and predictable than view-based revenue.</p>
+
+      <div class="pull-quote">
+        <blockquote>"I made more in my first month selling a $37 course on Whop than I did in three months of TikTok creator fund payouts. Same audience, different product."</blockquote>
+        <cite>— A clipper with 40K followers</cite>
+      </div>
+
+      <h3>Setting Up Your Whop Store</h3>
+
+      <ol>
+        <li><strong>Create a free account</strong> at whop.com. The setup process takes about ten minutes.</li>
+        <li><strong>Choose your product type.</strong> Whop supports digital downloads, courses, community access, and more. Start with one product — don't try to launch a course, a preset pack, and a community simultaneously.</li>
+        <li><strong>Set your price.</strong> Research what similar products charge. Don't underprice — a $47 course often converts better than a $9 course because the higher price implies higher value.</li>
+        <li><strong>Connect your social accounts.</strong> Link your TikTok, YouTube, or Instagram so buyers can verify you're a real clipper with real results.</li>
+        <li><strong>Drive traffic.</strong> Every clip you post should have a call-to-action pointing to your Whop store. Put the link in your bio. Mention it in pinned comments. Create clips that demonstrate your expertise — "how I edited this clip" breakdowns sell courses better than any ad.</li>
+      </ol>
+
+      <h3>The Funnel: How Viewers Become Buyers</h3>
+
+      <p>Not every viewer will buy. Most won't. But a small percentage will, and that percentage is enough. Here's how the math works: if one in every 200 viewers clicks your bio link, and one in every ten of those clicks results in a purchase, you need 2,000 views per sale. At a $37 price point, that's $18.50 per thousand views — roughly ten times what creator funds pay. And if the buyer joins your community at $20/month, that single conversion is worth $240/year, not $37 once.</p>
+
+      <p>This is why clippers who sell products out-earn clippers who rely solely on platform payouts. You're not trading views for pennies — you're using free views to drive traffic to a product that has real margin and recurring revenue potential.</p>
+
+    </div>
+  </article>
+
+  <div class="cta-box">
+    <h3>Want to Stand Out From the Crowd?</h3>
+    <p>Learn the advanced techniques that separate amateurs from professionals.</p>
+    <a href="tips.html">Read Tips &amp; Tricks →</a>
+  </div>
+
+  <footer>
+    <p>© 2026 The Daily Clipper — learnclipping.wiki</p>
+    <p>For inquiries: contact@learnclipping.wiki</p>
+  </footer>
+
+</body>
+</html>
