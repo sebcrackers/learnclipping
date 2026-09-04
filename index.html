@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Clipping — The Daily Clipper</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Old+Standard+TT:wght@400;700&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f1ea;
+      color: #1a1a1a;
+      font-family: 'Old Standard TT', Georgia, serif;
+      line-height: 1.7;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .masthead {
+      text-align: center;
+      border-bottom: 3px double #1a1a1a;
+      border-top: 3px double #1a1a1a;
+      padding: 28px 0 18px;
+      margin-bottom: 0;
+    }
+
+    .masthead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .masthead .tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #555;
+    }
+
+    .masthead .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 14px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      color: #666;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #1a1a1a;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 14px 20px;
+      border-right: 1px solid #ddd;
+      transition: background 0.2s;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    nav a:hover {
+      background: #1a1a1a;
+      color: #f4f1ea;
+    }
+
+    .front-page {
+      display: grid;
+      grid-template-columns: 2fr 1px 1fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .front-page .lead {
+      padding-right: 28px;
+    }
+
+    .front-page .lead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead p {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .front-page .lead .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 18px;
+    }
+
+    .divider-v {
+      background: #ccc;
+    }
+
+    .front-page .sidebar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+
+    .front-page .sidebar ol {
+      padding-left: 20px;
+    }
+
+    .front-page .sidebar li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .front-page .sidebar li a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .front-page .sidebar li a:hover {
+      text-decoration: underline;
+    }
+
+    .article {
+      padding: 36px 0;
+    }
+
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .article .subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .article .byline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 12px;
+    }
+
+    .article-body {
+      column-count: 2;
+      column-gap: 36px;
+      column-rule: 1px solid #e0ddd5;
+    }
+
+    .article-body p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .article-body p:first-of-type::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+    }
+
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 24px 0 12px;
+      break-after: avoid;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin-bottom: 16px;
+      padding-left: 22px;
+    }
+
+    .article-body li {
+      margin-bottom: 8px;
+    }
+
+    .article-body strong {
+      font-weight: 700;
+    }
+
+    .article-body a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .pull-quote {
+      border-top: 3px double #1a1a1a;
+      border-bottom: 3px double #1a1a1a;
+      padding: 24px 0;
+      margin: 28px 0;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-top: 10px;
+      font-style: normal;
+    }
+
+    .ad-box {
+      border: 2px dashed #bbb;
+      text-align: center;
+      padding: 24px;
+      margin: 28px 0;
+      break-inside: avoid;
+    }
+
+    .ad-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .ad-box .text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      background: #1a1a1a;
+      color: #f4f1ea;
+      padding: 32px;
+      text-align: center;
+      margin: 36px 0 0;
+    }
+
+    .cta-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      color: #ccc;
+    }
+
+    .cta-box a {
+      display: inline-block;
+      background: #f4f1ea;
+      color: #1a1a1a;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .cta-box a:hover {
+      background: #e8e2d4;
+    }
+
+    footer {
+      border-top: 3px double #1a1a1a;
+      margin-top: 40px;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .masthead h1 {
+        font-size: 2.2rem;
+      }
+
+      .front-page {
+        grid-template-columns: 1fr;
+      }
+
+      .front-page .lead {
+        padding-right: 0;
+      }
+
+      .divider-v {
+        display: none;
+      }
+
+      .article-body {
+        column-count: 1;
+      }
+
+      .article h2 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        padding: 12px 14px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <p class="tagline">The Premier Publication on Short-Form Video Monetization</p>
+    <h1>The Daily Clipper</h1>
+    <div class="meta">
+      <span>Vol. I — Issue No. 1</span>
+      <span>Established 2026</span>
+      <span>learnclipping.wiki</span>
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html">Front Page</a>
+    <a href="getting-started.html">Getting Started</a>
+    <a href="tools.html">Tools &amp; Software</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="tips.html">Tips &amp; Tricks</a>
+  </nav>
+
+  <section class="front-page">
+    <div class="lead">
+      <p class="byline">By The Editors — Published Today</p>
+      <h2>Clipping Is the New Gold Rush — And the Pickaxe Is Free</h2>
+      <p>Every day, thousands of hours of long-form content get uploaded to YouTube, Twitch, and podcasts. Buried inside those hours are thirty-second moments — a hot take, a joke, a controversial opinion — that millions of people would watch, share, and engage with. The people who find those moments and turn them into vertical videos are called clippers. Some of them make hundreds. Some make thousands. A few make six figures a month.</p>
+      <p>The barrier to entry is almost zero. You need a computer, free software, and an eye for what's entertaining. You don't need a camera. You don't need to be on video. You don't need a following to start. You're not building a personal brand — you're building a content machine that works while you sleep.</p>
+      <p>This publication exists to teach you exactly how that machine works, from the first clip you cut to the first dollar you deposit. We'll cover the tools, the workflow, the platforms that pay, and the common mistakes that keep beginners stuck at zero. Turn the page. Let's get to work.</p>
+    </div>
+
+    <div class="divider-v"></div>
+
+    <aside class="sidebar">
+      <h3>In This Issue</h3>
+      <ol>
+        <li><a href="getting-started.html">Getting Started: Your First Clip in 30 Minutes</a></li>
+        <li><a href="tools.html">Tools &amp; Software: What You Actually Need</a></li>
+        <li><a href="monetization.html">Monetization: Earning on Whop</a></li>
+        <li><a href="tips.html">Tips &amp; Tricks From Top Clippers</a></li>
+      </ol>
+
+      <div class="ad-box" style="margin-top: 24px;">
+        <p class="label">— Sponsored —</p>
+        <p class="text">Your ad could be here.<br>contact@learnclipping.wiki</p>
+      </div>
+    </aside>
+  </section>
+
+  <div class="pull-quote">
+    <blockquote>"The money isn't in making one viral clip. It's in making fifty clips a day, every day, until the algorithm can't ignore you."</blockquote>
+    <cite>— A clipper who asked not to be named</cite>
+  </div>
+
+  <div class="cta-box">
+    <h3>Ready to Start Clipping?</h3>
+    <p>Begin with our Getting Started guide. No prior experience required.</p>
+    <a href="getting-started.html">Read the Guide →</a>
+  </div>
+
+  <footer>
+    <p>© 2026 The Daily Clipper — learnclipping.wiki</p>
+    <p>For inquiries: contact@learnclipping.wiki</p>
+  </footer>
+
+</body>
+</html>
